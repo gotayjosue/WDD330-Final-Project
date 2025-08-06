@@ -21,3 +21,16 @@ window.addEventListener('resize', () => {
     }
 });
 
+// Fetch exchange rates from an API
+
+const apiKey = 'YOUR_API_KEY';
+const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data); // Handle your exchange rate data here
+  })
+  .catch(error => {
+    console.error('Error fetching exchange rates:', error);
+  });
