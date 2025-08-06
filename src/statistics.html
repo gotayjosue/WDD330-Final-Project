@@ -8,22 +8,50 @@
   <script type="module" src="js/statistics.js"></script>
 </head>
 <body>
+    <header>
+        <button id="menuButton"></button>
+        <img src="images/currency-logo.png" alt="Currenzy Logo" class="logo">
+        <nav id="navigation">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="statistics.html">Statistics</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+        </ul>
+        </nav>
+    </header>
     <main>
         <h1>Statistics</h1>
-        <label>Select Currency:</label>
-        <select id="currency">
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-        </select>
-        <label for="range">Select a range:</label>
-        <select name="range" id="range">
-            <option value="1w">Last Week</option>
-            <option value="1m">Last Month</option>
-            <option value="1y">Last Year</option>
-        </select>
+        <div class="stats-container">
+            <label>Select Currency:</label>
+            <select id="currency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+            </select>
+            <label for="range" class="range-label">Select a range:</label>
+            <select name="range" id="range">
+                <option value="1w">Last Week</option>
+                <option value="1m">Last Month</option>
+                <option value="1y">Last Year</option>
+            </select>
+        </div>
+        <div class="chart-container">
+            <canvas id="currencyChart"></canvas>
+        </div>
     </main>
     <footer>
+        <img src="images/currency-logo.png" alt="Currenzy Logo" class="footer-logo">
+        <div class="links">
+        <a href="statistics.html">Statistics</a>
+        <a href="#">Terms of Service</a>
+        <a href="faq.html">FAQ</a>
+        </div>
+        <div class="social-media">
+        <a href="https://www.facebook.com" target="_blank"><img src="images/facebook-icon.png" alt="Facebook"></a>
+        <a href="https://www.twitter.com/Currenzy" target="_blank"><img src="images/x-icon.png" alt="Twitter"></a>
+        <a href="https://www.instagram.com/Currenzy" target="_blank"><img src="images/instagram-icon.png" alt="Instagram"></a>
+        </div>
+        <p>&copy; 2023 Currenzy Exchange. All rights reserved.</p>
     </footer>
 </body>
 </html>

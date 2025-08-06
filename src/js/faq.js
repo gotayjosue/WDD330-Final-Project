@@ -1,3 +1,6 @@
+import { expandDetails } from './utils.mjs';
+
+expandDetails();
 // Toggle hamburger menu
 const menuButton = document.querySelector('#menuButton')
 const navBar = document.querySelector('#navigation')
