@@ -130,6 +130,15 @@ footer{
     gap: 15px;
 }
 
+.links a{
+    color: rgba(0, 0, 0, 0.432);
+    text-decoration: none;
+}
+
+.links a:hover{
+    text-decoration: underline;
+}
+
 .social-media{
     grid-column: 3;
     display: flex;
