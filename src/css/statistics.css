@@ -178,6 +178,7 @@ footer p{
         width: 50%;
         grid-template-columns: 1fr 1fr;
         margin: 0 auto;
+    }
 
     #currency{
         grid-column: 1;
@@ -191,4 +192,29 @@ footer p{
         grid-row: 1;
     }
 
-}}
+    footer{
+        height: 230px;
+    }
+
+    .footer-logo{
+        width: 200px;
+    }
+
+    .links{
+        grid-column: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        gap: 15px;
+    }
+
+    .social-media{
+        gap: 20px;
+    }
+
+    .social-media img{
+        width: 20px;
+    }
+
+}
