@@ -1,4 +1,8 @@
 import { expandDetails } from './utils.mjs';
+const year = new Date().getFullYear();
+const yearElement = document.querySelector('#current-year');
+
+yearElement.textContent = year; // Set the current year in the footer
 
 expandDetails();
 // Toggle hamburger menu

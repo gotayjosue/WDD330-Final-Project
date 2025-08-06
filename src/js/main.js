@@ -2,6 +2,12 @@
 const menuButton = document.querySelector('#menuButton')
 const navBar = document.querySelector('#navigation')
 const changeButton = document.querySelector('#change-icon')
+const year = new Date().getFullYear();
+const yearElement = document.querySelector('#current-year');
+
+yearElement.textContent = year; // Set the current year in the footer
+
+// Add event listener to the menu button to toggle the navigation bar
 
 menuButton.addEventListener('click', () =>{
 
@@ -9,7 +15,7 @@ menuButton.addEventListener('click', () =>{
     menuButton.classList.toggle('open')
 })
 
-
+// Change the icon when the menu is open or closed
 window.addEventListener('resize', () => {
     if (window.innerWidth >= 1000) { //Everytime the page gets bigger the class 'open' will be take out of the navBar and the menuButton//
         navBar.classList.remove('open');

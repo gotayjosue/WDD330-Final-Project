@@ -1,3 +1,8 @@
+const year = new Date().getFullYear();
+const yearElement = document.querySelector('#current-year');
+
+yearElement.textContent = year; // Set the current year in the footer
+
 // Toggle hamburger menu
 const menuButton = document.querySelector('#menuButton')
 const navBar = document.querySelector('#navigation')
