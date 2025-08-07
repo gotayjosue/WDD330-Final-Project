@@ -1,4 +1,5 @@
-import { loadCoins } from './utils.mjs';
+import { convertCoins, loadCoins, switchCurrencies } from './utils.mjs';
+
 // Toggle hamburger menu
 const menuButton = document.querySelector('#menuButton')
 const navBar = document.querySelector('#navigation')
@@ -28,13 +29,34 @@ window.addEventListener('resize', () => {
     }
 });
 
-// Fetch exchange rates from an API
 
+//Inserting data from the API into the select elements
 const apiKey = 'f6575c00e8159e80d3a297d4';
 const url = `https://v6.exchangerate-api.com/v6/${apiKey}/codes`;
 const select1 = document.querySelector('#from-currency');
 const select2 = document.querySelector('#to-currency');
+const amountInput = document.querySelector('#amount');
+const resultText = document.querySelector('#result');
+const convertButton = document.querySelector('#convert-button');
+const switchButton = document.querySelector('#change-icon');
 
-
-
+// Load coins into the select elements
 loadCoins(url, select1, select2);
+
+// Convert coins when the convert button is clicked
+convertButton.addEventListener('click', () => {
+  convertCoins(apiKey, select1, select2, amountInput, resultText);
+});
+
+// Switch currencies when the switch button is clicked
+switchButton.addEventListener('click', () => {
+  switchCurrencies(select1, select2);
+
+  switchButton.classList.add('rotate'); // Add a class to rotate the icon
+
+  setTimeout(() => {
+    switchButton.classList.remove('rotate'); // Remove the class after a short delay
+  }, 500);
+});
+
+

@@ -38,6 +38,8 @@ export function expandDetails() {
   });
 }
 
+// Fetch exchange rates from an API
+
 export async function loadCoins(url, select1, select2) {
   try {
     const response = await fetch(url);
@@ -64,4 +66,37 @@ export async function loadCoins(url, select1, select2) {
     select1.innerHTML = '<option value="">Error connecting to API</option>';
     select2.innerHTML = '<option value="">Error connecting to API</option>';
   }
+}
+
+// Convert coins using the API
+
+export async function convertCoins(apiKey, fromCurrency, toCurrency, amountInput, resultText) {
+  const from = fromCurrency.value;
+  const to = toCurrency.value;
+  const amount = parseFloat(amountInput.value);
+
+  if (!from || !to || isNaN(amount) || amount <= 0) {
+    alert("Please enter valid data.");
+    return;
+  }
+
+  try {
+    const res = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/pair/${from}/${to}/${amount}`);
+    const data = await res.json();
+
+    if (data.result === "success") {
+      resultText.textContent = `${to} ${data.conversion_result.toFixed(2)}`;
+    } else {
+      resultText.textContent = "Error in conversion.";
+    }
+  } catch (error) {
+    console.error("Error converting:", error);
+    resultText.textContent = "Error connecting to API.";
+  }
+}
+
+export function switchCurrencies(select1, select2) {
+  const tempValue = select1.value;
+  select1.value = select2.value;
+  select2.value = tempValue;
 }

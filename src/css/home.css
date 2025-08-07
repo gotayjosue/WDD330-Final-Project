@@ -134,7 +134,22 @@ input{
     cursor: pointer;
     grid-row: 3;
     margin-top: 30px;
-    transition: transform 0.3s ease;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        scale: 1.2;
+    }
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+.rotate {
+    animation: rotate 0.5s ease;
 }
 
 .amount-label{
@@ -279,6 +294,18 @@ footer p{
         margin-top: 30px;
     }
 
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg);
+        }
+        50% {
+            scale: 1.5;
+        }
+        100% {
+            transform: rotate(180deg);
+        }
+    }
+
     .amount-label{
         grid-row: 3;
         grid-column: 2/3;
@@ -296,7 +323,7 @@ footer p{
 
     #result{
         grid-row: 9;
-        grid-column: 2/3;
+        grid-column: 1/4;
         margin-bottom: 20px;
     }
 
