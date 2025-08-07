@@ -93,6 +93,17 @@ export async function convertCoins(apiKey, fromCurrency, toCurrency, amountInput
     console.error("Error converting:", error);
     resultText.textContent = "Error connecting to API.";
   }
+  // Store the last conversion in localStorage
+  const lastConversion = {
+    from: fromCurrency.value,
+    to: toCurrency.value,
+    amount: amountInput.value,
+    result: resultText.textContent,
+  };
+  let history = JSON.parse(localStorage.getItem('conversionHistory')) || [];
+  history.push(lastConversion);
+  localStorage.setItem('conversionHistory', JSON.stringify(history));
+
 }
 
 export function switchCurrencies(select1, select2) {
