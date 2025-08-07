@@ -1,3 +1,4 @@
+import { loadCoins } from './utils.mjs';
 // Toggle hamburger menu
 const menuButton = document.querySelector('#menuButton')
 const navBar = document.querySelector('#navigation')
@@ -29,14 +30,11 @@ window.addEventListener('resize', () => {
 
 // Fetch exchange rates from an API
 
-const apiKey = 'YOUR_API_KEY';
-const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+const apiKey = 'f6575c00e8159e80d3a297d4';
+const url = `https://v6.exchangerate-api.com/v6/${apiKey}/codes`;
+const select1 = document.querySelector('#from-currency');
+const select2 = document.querySelector('#to-currency');
 
-fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data); // Handle your exchange rate data here
-  })
-  .catch(error => {
-    console.error('Error fetching exchange rates:', error);
-  });
+
+
+loadCoins(url, select1, select2);
