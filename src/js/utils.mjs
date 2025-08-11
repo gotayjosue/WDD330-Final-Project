@@ -156,8 +156,10 @@ function showToast(message) {
     }, 3000); // It hides after 3 seconds
 }
 
+
 let chart; //Reference to update the chart
 
+// Fetch data and plot the chart
 export async function fetchDataAndPlot(select1, select2, rangeSelect, ctx) {
   const base = select1.value;
   const target = select2.value;
