@@ -206,8 +206,8 @@ export async function fetchDataAndPlot(select1, select2, rangeSelect, ctx) {
               }]
           },
           options: {
-              responsive: false,
-              maintainAspectRatio: false,
+              responsive: true,
+              maintainAspectRatio: true,
               scales: {
                   x: { title: { display: true, text: 'Date' } },
                   y: { title: { display: true, text: 'Price' } }
