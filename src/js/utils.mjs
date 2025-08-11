@@ -49,6 +49,21 @@ export async function loadCoins(url, select1, select2) {
     select1.innerHTML = '';
     select2.innerHTML = '';
 
+    // Add default options
+    const defaultOption1 = document.createElement("option");
+    defaultOption1.value = "";
+    defaultOption1.textContent = "Select base currency";
+    defaultOption1.disabled = true;
+    defaultOption1.selected = true;
+    select1.appendChild(defaultOption1);
+
+    const defaultOption2 = document.createElement("option");
+    defaultOption2.value = "";
+    defaultOption2.textContent = "Select target currency";
+    defaultOption2.disabled = true;
+    defaultOption2.selected = true;
+    select2.appendChild(defaultOption2);
+
     if (data.result === "success") {
       data.supported_codes.forEach(([code, name]) => {
         const option = document.createElement("option");
@@ -110,4 +125,98 @@ export function switchCurrencies(select1, select2) {
   const tempValue = select1.value;
   select1.value = select2.value;
   select2.value = tempValue;
+}
+
+// Get the date range based on the selected option
+export function getDateRange(range) {
+    const today = new Date();
+    const end = today.toISOString().split("T")[0];
+    let start;
+
+    if (range === "last_week") {
+        const d = new Date();
+        d.setDate(today.getDate() - 7);
+        start = d.toISOString().split("T")[0];
+    } else if (range === "last_month") {
+        const d = new Date();
+        d.setMonth(today.getMonth() - 1);
+        start = d.toISOString().split("T")[0];
+    }
+    return { start, end };
+}
+
+//Alerts currency selection
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.className = "toast show";
+
+    setTimeout(() => {
+        toast.className = toast.className.replace("show", "");
+    }, 3000); // It hides after 3 seconds
+}
+
+let chart; //Reference to update the chart
+
+export async function fetchDataAndPlot(select1, select2, rangeSelect, ctx) {
+  const base = select1.value;
+  const target = select2.value;
+  const { start, end } = getDateRange(rangeSelect.value);
+
+  if (base === target) {
+      showToast("Select different currencies");
+      return;
+  }
+
+  // Avoid future dates
+  const today = new Date().toISOString().split("T")[0];
+  const safeEnd = end > today ? today : end;
+
+  try {
+      const res = await fetch(`https://api.frankfurter.app/${start}..${safeEnd}?from=${base}&to=${target}`);
+
+      if (!res.ok) {
+          showToast("No data found for this combination of dates and currencies.");
+          return;
+      }
+
+      const data = await res.json();
+
+      if (!data.rates || Object.keys(data.rates).length === 0) {
+          alert("No historical data available.");
+          return;
+      }
+
+      const labels = Object.keys(data.rates);
+      const values = labels.map(date => data.rates[date][target]);
+
+      // Destruir gráfico anterior si existe
+      if (chart) chart.destroy();
+
+      chart = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels,
+              datasets: [{
+                  label: `${base} to ${target}`,
+                  data: values,
+                  borderColor: 'blue',
+                  backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                  fill: true
+              }]
+          },
+          options: {
+              responsive: false,
+              maintainAspectRatio: false,
+              scales: {
+                  x: { title: { display: true, text: 'Date' } },
+                  y: { title: { display: true, text: 'Price' } }
+              }
+          }
+      });
+
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      alert("An error occurred while fetching the data.");
+  }
 }

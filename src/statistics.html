@@ -6,9 +6,11 @@
     <title>Currenzy Exchange | Statistics</title>
   <link rel="stylesheet" href="css/statistics.css">
   <script type="module" src="js/statistics.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
+        <div id="toast" class="toast"></div>
         <button id="menuButton"></button>
         <img src="images/currency-logo.png" alt="Currenzy Logo" class="logo">
         <nav id="navigation">
@@ -22,21 +24,32 @@
     <main>
         <h1>Statistics</h1>
         <div class="stats-container">
-            <label>Select Currency:</label>
-            <select id="currency">
+            <label class="from-label">From:</label>
+            <select id="from-chart">
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
                 <option value="GBP">GBP</option>
             </select>
+
+            <img  src="images/change.png" alt="change currency icon" id="change-icon">
+
+            <label class="to-label">To:</label>
+            <select id="to-chart">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+            </select>
+
             <label for="range" class="range-label">Select a range:</label>
             <select name="range" id="range">
-                <option value="1w">Last Week</option>
-                <option value="1m">Last Month</option>
-                <option value="1y">Last Year</option>
+                <option value="last_week">Last Week</option>
+                <option value="last_month">Last Month</option>
+                <option value="last_year">Last Year</option>
             </select>
         </div>
+        
         <div class="chart-container">
-            <canvas id="currencyChart"></canvas>
+            <canvas id="price-chart"></canvas>
         </div>
     </main>
     <footer>
