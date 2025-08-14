@@ -177,6 +177,12 @@ input{
     color: white;
     cursor: pointer;
     grid-row: 8;
+    transition: 0.5s;
+}
+
+#convert-button:hover{
+    transition: 0.5s;
+    scale: 1.1;
 }
 
 #result{
