@@ -192,7 +192,7 @@ export async function fetchDataAndPlot(select1, select2, rangeSelect, ctx) {
       const labels = Object.keys(data.rates);
       const values = labels.map(date => data.rates[date][target]);
 
-      // Destruir gráfico anterior si existe
+      // Destroy previous chart if exists
       if (chart) chart.destroy();
 
       chart = new Chart(ctx, {
