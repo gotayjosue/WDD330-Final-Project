@@ -40,6 +40,26 @@ const resultText = document.querySelector('#result');
 const convertButton = document.querySelector('#convert-button');
 const switchButton = document.querySelector('#change-icon');
 
+document.addEventListener("DOMContentLoaded", async () => {
+
+  await loadCoins(url, select1, select2);
+
+  // Load the last conversion from localStorage if available
+  const history = JSON.parse(localStorage.getItem('conversionHistory'));
+  if (history && history.length > 0) {
+    const lastConversion = history[history.length - 1];
+
+    if (select1.querySelector(`option[value="${lastConversion.from}"]`)) {
+      select1.value = lastConversion.from;
+    }
+    if (select2.querySelector(`option[value="${lastConversion.to}"]`)) {
+      select2.value = lastConversion.to;
+    }
+    amountInput.value = lastConversion.amount;
+    resultText.textContent = lastConversion.result;
+  }
+});
+
 // Load coins into the select elements
 loadCoins(url, select1, select2);
 
